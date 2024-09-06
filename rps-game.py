@@ -1,5 +1,6 @@
 import os
 import random
+import platform
 
 options = ['rock', 'spock', 'paper', 'lizard', 'scissors']
 
@@ -21,11 +22,24 @@ def compare_choices(player_choice, computer_choice):
         return "Computer Wins!"
 
 def start_game():
-    os.system('cls')
-
-    continue_game = True
+        '''
+        Clears the terminal depending on the operating system.
+        '''
+        system_name = platform.system()
         
-    while continue_game:
+        try:
+            if system_name == 'Windows':
+                os.system("cls")
+            elif system_name in ['Linux', 'Darwin']:
+                os.system("clear")
+            else:
+                print(f"Unsupported operating system: {system_name}")
+        except Exception as e:
+            print(f"An error occurred while trying to clear the terminal: {e}")
+        
+        continue_game = True
+        
+        while continue_game:
             player_input = str(input(
             "Choose your weapon: \n"
             "[1] - Rock\n"
